@@ -1,28 +1,7 @@
 from collections import defaultdict
 from dijkstra import dijkstra as dk
 
-
-class Graph(object):
-
-    def __init__(self):
-        """
-               self.edges is a dict of all possible next nodes
-               e.g. {'X': ['A', 'B', 'C', 'E'], ...}
-               self.weights has all the weights between two nodes,
-               with the two nodes as a tuple as the key
-               e.g. {('X', 'A'): 7, ('X', 'B'): 2, ...}
-               """
-        self.edges = defaultdict(list)
-        self.weights = {}
-
-    def add_node(self, from_node, to_node, weight):
-        # Note: assumes edges are bi-directional
-        self.edges[from_node].append(to_node)
-        self.edges[to_node].append(from_node)
-        self.weights[(from_node, to_node)] = weight
-
-
-new_graph = Graph()
+new_graph = dk.Graph()
 
 edges = [
     ('X', 'A', 7),
@@ -48,6 +27,7 @@ edges = [
 for edge in edges:
     new_graph.add_node(*edge)
 
-print(new_graph.edges)
+# print(new_graph.edges)
 
-# dk.dijkstra(graph=new_graph, initial="X", end="Y")
+shortest_path = dk.dijkstra(graph=new_graph, initial="X", end="Y")
+print(shortest_path)
